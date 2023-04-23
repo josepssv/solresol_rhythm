@@ -670,7 +670,7 @@ for(var q=0;q<ntimes;q++){
  tempos=shuffleArray(tempos)
  }// end q
    
-   
+  select("#code").html(JSON.stringify(compo)); 
   //console.log(JSON.stringify(compo));
   var tempo = compo[0][0];
   var nt = 0;
