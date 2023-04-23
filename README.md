@@ -1,2 +1,2 @@
-# solresol_rhythm
+# Solresol Rhythm
 Development of Solresol. Rhythm
