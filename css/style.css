@@ -1,0 +1,39 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  color:#997;
+  background-color:#223;
+  font-family:arial;
+}
+canvas {
+  display: block;
+}
+#section15 midi-visualizer .staff-visualizer {
+  background: #ffd;
+  border: 2px solid black;
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  margin: 4px;
+  margin-top: 0;
+  overflow: auto;
+  width:450px;
+}
+.bute{background-color:#444;color:#fff;}
+.svars{background-color:#000;color:#fff;font-size:14px;padding:4px; margin-top:3px;}
+
+a:link {
+  color: #997;
+}
+
+a:visited {
+  color: #997;
+}
+
+a:hover {
+  color: lightgreen;
+}
+
+a:active {
+  color: hotpink;
+}
+.stitle{color:#cca;}
