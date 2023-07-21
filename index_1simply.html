@@ -1,1 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
 
+    <meta property="og:title" content="Solresol Rhythm" />
+    <meta property="og:description" content="Solresol Rhythm" />
+    <meta property="og:image" content="css/Solresol_Rhythm.png" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
+    <!--<script src="https://raw.githubusercontent.com/josepssv/solresol_rhythm/main/solresol_02.json"></script>
+    <script src="solresol_02.json"></script>-->
+    <script src="scripts/midiWriter.js"></script>
+    <script src="scripts/compo1.js"></script>
+    <script src="scripts/silabajs.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <main style="width: 60%; margin: 0 auto;">
+      <h3 id="title">
+        Solresol Rhythm<span style="margin-left:12px;font-size:12px;color:#777">1 Simply</span>
+      </h3>
+
+      <section id="section15" style="text-align:left;color:#000">
+        <midi-player
+          id="player15"
+          src=""
+          loop
+          sound-font
+          visualizer="#section15"
+        >
+        </midi-player>
+        <midi-visualizer type="staff"> </midi-visualizer>
+      </section>
+      <div id="infotrack" style="color:#fff;font-size:12px;margin:4px;"></div>
+      <input
+        type="text"
+        id="inputWord"
+        value="Solresol"
+        style="border-style:none;border-width:0px;width:250px;padding:10px;background:#111;color:#eee;"
+      /><button id="buttonSolve" style="padding:6px;">➤</button><br />
+      <div id="preinfo" style="width:450px"></div>
+      <button
+        id="resume"
+        class="bute"
+        style="float:left;
+    margin-right: 2px;display:none;"
+      >
+        Resume
+      </button>
+      <button
+        id="brandom"
+        class="bute"
+        style="float:left;
+    margin-right: 2px;"
+      >
+        Random</button
+      ><button
+        id="expi"
+        class="bute"
+        style="float:left;
+    margin-right: 2px;display:none;"
+      >
+        Export
+      </button>
+      <div id="info" style="width:450px"></div>
+      <br />
+      <h5>Unadjusted variables:</h5>
+      <div style="font-size:12px;font-style:italic;">
+        <p>
+          <span class="stitle">Tempo, BPM:</span><br />Set randomly or user-defined <br /><input
+            id="inputTempo"
+            class="svars"
+            style="width:40px;"
+            value="120"
+          />
+        </p>
+        <p>
+          <span class="stitle"> Background rhythm / metronome volume:</span><br />Set randomly or user-defined 1 1/2 1/4 1/8 <br />
+          80 40 60 0: Four rhythm volume sound; 0 0 0 0 No sound <br /><input
+            id="inputMetronomeVolume"
+            class="svars"
+            style="width:80px;"
+            value="80 40 60 0"
+          />
+        </p>
+      <p>
+        <span class="stitle">Background rhythm / metronome Instruments :</span> <br />
+          Not implemented<br />
+          Default midi numbers:<br />
+          <textarea id="inputMetronomeInstruments"  class="svars" style="width:200px;height:110px;border-style:solid;border-width:0px;" >{
+"whole":[44,40],
+"half":[44,45],
+"quarter":[42,40],
+"eight":[53,55]
+}</textarea>
+        </p>
+        <p>
+          <span class="stitle">Composition parts:</span> <br />
+          Dependent of the Solresol concept <br />
+          consonant/vowel/syllable/word: C V - -- <br />
+          <input id="inputCVconcept" readonly class="svars" style="width:300px;border-style:solid;border-width:0px;" value="C-V"/>
+        </p>
+        <p>
+          <span class="stitle">Repetition coda number:</span> <br />
+          Set randomly or user-defined <br />
+          Default 4<br />
+          <input id="inputNtimesCoda" class="svars" style="width:30px;" value="4"/>
+        </p>
+    <p>
+      <span class="stitle">Compass:</span> <br />
+          Not implemented <br />
+          Default 4/4<br />
+          <input id="inputCompass" readonly class="svars" style="width:30px;border-style:solid;border-width:0px;" value="4/4"/>
+        </p>
+         <p  style="width:300px;">
+           <span class="stitle">Dynamic:</span> <br />
+          Semi implemented <br />
+          According to the beat of the compass, the first beat accentuated and the rest of the beats decreased by 20%. Randomly varying all hits by 10%
+  <br />
+          <input id="inputDynamic" readonly class="svars" style="width:160px;border-style:solid;border-width:0px;" value="Attached to the compass"/>
+        </p><p>
+        <span class="stitle">Octave notes:</span> <br />
+          Not implemented. Bass and Soprano bars<br />
+          Randomized<br />
+          <input id="inputOctaveNotes" readonly class="svars" style="width:90px;border-style:solid;border-width:0px;" value="Randomized"/>
+        </p>
+        <p style="width:300px;"><span class="stitle">Duration notes:</span> <br />
+          Semi implemented. This is the most complicated part. Number of Solresol notes that fit inside a measure chosen at random from multiple beat combinations that add up to a whole measure.<br />
+Four bars (4/4) with different random times are created for each of the letter or consonant symbols C V - -- which are distributed in the score according to the order of the coda CV- -- obtained from the Solresol concept<br>
+          Semi randomized<br />
+          <input id="inputDurationNotes" readonly class="svars" style="width:130px;border-style:solid;border-width:0px;" value="Semi randomized"/>
+        </p> <p>
+        <span class="stitle">Instruments:</span> <br />
+          Not implemented. Randomized <br />
+          <input id="inputInstruments" class="svars" style="width:60px;border-style:solid;border-width:0px;" value="4 1"/>
+        </p><p>
+        <span class="stitle">Chords:</span> <br />
+          Not implemented <br />
+          <br />
+          <input id="inputChords" readonly class="svars" style="width:30px;border-style:solid;border-width:0px;" value=""/>
+        </p><p>
+        <span class="stitle">Start and end:</span> <br />
+          Not implemented <br />
+          <br />
+          <input id="inputStartEnd" readonly class="svars" style="width:30px;border-style:solid;border-width:0px;" value=""/>
+        </p>
+        <p>
+        <span class="stitle">Progression:</span> <br />
+          Not implemented <br />
+          <br />
+          <input id="inputProgression" readonly class="svars" style="width:30px;border-style:solid;border-width:0px;" value=""/>
+        </p>
+        <p>
+<span class="stitle">Data array:</span>
+          <br />      
+<pre id="code" style="width:450px;text-align:left;color:#888;overflow: hidden;"></pre>
+      </p>
+      </div>
+      <br />
+
+      <br>
+  <div style="margin:50px 0px 180px 0px ;white-space: pre;">
+      <code>
+Thanks to
+        <a href="https://sidosi.org/" target="_blank"
+           >Sidosi.org</a>
+        <a href="https://grimmdude.com/MidiWriterJS/docs/" target="_blank"
+          >MidiWriterJS</a
+        >
+        <a href="https://github.com/cifkao/html-midi-player" target="_blank"
+          >cifkao/html-midi-player  Magenta </a
+        >
+        <a href="https://tonejs.github.io/docs/" target="_blank">Tone.js</a>
+        <a href="https://wikiloops.com" target="_blank">Wikiloops</a>
+        <a href="https://chat.openai.com/chat" target="_blank">ChatGPT</a>
+        <a href="https://github.com/nicofrem/silabajs" target="_blank">Silabajs</a>
+     
+Contributions
+        <a href="https://www.wikiloops.com/artist/josepssv.php" target="_blank">Josepssv</a>
+        <a  href="https://www.wikiloops.com/artist/abuitremorem.php" target="_blank">Abuitremorem</a>    
+        
+Code
+        <a href="https://github.com/josepssv/solresol_rhythm" target="_blank">Github</a>
+<!--Track
+        <a href="https://www.wikiloops.com/backingtrack-jam-267281.php" target="_blank">Our house</a>
+-->
+   </code>
+    </div>
+ </main>
+    <script src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.23.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.5.0"></script>
+
+    <script src="scripts/sketch1.js"></script>
+  </body>
+</html>
